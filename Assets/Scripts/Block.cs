@@ -2,10 +2,12 @@
 using System.Collections;
 
 public class Block : MonoBehaviour {
+	public float Mass;
 	public int ShipID = 0;
 	public int BlockID = 0;
 	public BlockController bc;
-	public Transform Parent;
+	public Transform ParentTrans;
+	public Parent Parent;
 	// Use this for initialization
 	void Start() {
 
@@ -27,18 +29,21 @@ public class Block : MonoBehaviour {
 				b++;
 			}
 		}
-		bc.Blocks.Remove (bc.Blocks[bc.Blocks.IndexOf (this.transform)]);
+		bc.Blocks.Remove (bc.Blocks [bc.Blocks.IndexOf (this.transform)]);
+		//print (b);
 		if(b == 0)
 		{
-			Destroy(Parent);
+			Destroy(ParentTrans.gameObject);
 		}
 		if (b == 1)
 		{
-			Destroy(this);
+			Mass = 0;
+			Parent.CheckBlocks();
+			Destroy(this.gameObject);
 		}
 	    if(b > 1)
 		{
-			Parent.GetComponent<Parent>().DestroyBlock(this.transform);
+			Parent.DestroyBlock(this.transform);
 		}
 
 	}
@@ -48,16 +53,18 @@ public class Block : MonoBehaviour {
 		ShipID = NewShipID;
 		GameObject tParent = GameObject.Find ("Parent " + NewShipID.ToString ());
 		if (tParent == null) {
-			Parent = Instantiate (bc.Parent, transform.position, Quaternion.identity) as Transform;
-			Parent.GetComponent<Parent>().ShipID = NewShipID;
-			Parent.GetComponent<Parent>().bc = bc;
-			Parent.name = "Parent " + NewShipID.ToString ();
+			ParentTrans = Instantiate (bc.Parent, transform.position, Quaternion.identity) as Transform;
+			Parent = ParentTrans.GetComponent<Parent>();
+			Parent.ShipID = NewShipID;
+			Parent.bc = bc;
+			ParentTrans.name = "Parent " + NewShipID.ToString ();
 		}
 		else 
 		{
-			Parent = tParent.transform;
+			ParentTrans = tParent.transform;
+			Parent = ParentTrans.GetComponent<Parent>();
 		}
-		transform.parent = Parent;
+		transform.parent = ParentTrans;
 		for(int i = 0;i < 4;i++)
 		{
 			Block thisCheck = CheckAdjacent(i);
@@ -92,8 +99,8 @@ public class Block : MonoBehaviour {
 		//Debug.DrawRay (transform.position,-transform.up,Color.red,50);
 		if (hits != null) {
 			foreach (RaycastHit2D hit in hits) {
-				if (hit.transform != transform && hit.transform.tag == transform.tag) {
-					return hit.transform.GetComponent<Block> ();
+				if (hit.collider.transform != transform && hit.collider.tag == transform.tag) {
+					return hit.collider.GetComponent<Block> ();
 				}
 			}
 		} 

@@ -18,14 +18,12 @@ public class BlockController : MonoBehaviour {
 		Blocks.Add (Instantiate(FloorPrefab,new Vector3(transform.position.x - 1,transform.position.y + 1,transform.position.z),Quaternion.identity) as Transform);
 		Blocks.Add (Instantiate(FloorPrefab,new Vector3(transform.position.x + 1,transform.position.y - 1,transform.position.z),Quaternion.identity) as Transform);
 		Blocks.Add (Instantiate(FloorPrefab,new Vector3(transform.position.x + 1,transform.position.y + 1,transform.position.z),Quaternion.identity) as Transform);
-		Blocks.Add (Instantiate(FloorPrefab,new Vector3(transform.position.x + 2,transform.position.y,transform.position.z),Quaternion.identity) as Transform);
-		Blocks.Add (Instantiate(FloorPrefab,new Vector3(transform.position.x + 3,transform.position.y,transform.position.z),Quaternion.identity) as Transform);
 		foreach(Transform ship in Blocks)
 		{
 			ship.GetComponent<Block>().bc = this;
 		}
 		Reconnect();
-		StartCoroutine("Destruction");
+		Blocks[1].GetComponent<Block>().Parent.CheckBlocks();
 	}
 	
 	// Update is called once per frame
