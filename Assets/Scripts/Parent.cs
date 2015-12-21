@@ -26,8 +26,8 @@ public class Parent : MonoBehaviour {
 			{
 				block = child.GetComponent<Block>();
 				rigidBody2D.mass += block.Mass;
-				SumLocation.x += block.transform.position.x * block.Mass;
-				SumLocation.y += block.transform.position.y * block.Mass;
+				SumLocation.x += block.transform.localPosition.x * block.Mass;
+				SumLocation.y += block.transform.localPosition.y * block.Mass;
 			}
 
 		}

@@ -24,8 +24,8 @@ public class GhostBlock : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.F))
 		{
 			CurBlock++;
-			print(Blocks.Count);
-			print(CurBlock);
+			//print(Blocks.Count);
+			//print(CurBlock);
 			if(CurBlock >= Blocks.Count)
 			{
 				CurBlock = 0;
