@@ -101,7 +101,6 @@ public class Block : MonoBehaviour {
 		//make sure the block we hit was not 1. us 2. a shipblock 3. is not part of another ship
 		if (hits != null) {
 			foreach (RaycastHit2D hit in hits) {
-				Debug.Log (RoundToX(Vector3.Distance(hit.transform.position,transform.position),0.5f));
 				if (hit.collider.transform != transform && hit.collider.tag == transform.tag && 
 					RoundToX(Vector3.Distance(hit.transform.position,transform.position),1.0f) % 1 == 0 && 
 					RoundToX(hit.transform.rotation.eulerAngles.z - transform.rotation.eulerAngles.z,0.2f) % 90 == 0){
