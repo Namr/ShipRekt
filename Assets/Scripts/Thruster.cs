@@ -11,6 +11,7 @@ public class Thruster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//apply the force needed to the parent
 		if (Input.GetKey(KeyCode.Space)) {
 			block.Parent.rigidBody2D.AddForceAtPosition (transform.up * Speed, transform.position);
 		}

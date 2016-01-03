@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 public class GhostBlock : MonoBehaviour {
 	public bool ShouldCheck = true;
+	//all possible blocks to choose from
 	public List<Transform> Blocks;
 	Transform BlockTemplate;
+	//index of current block
 	int CurBlock = 1;
 	Vector3 pos;
 	bool snapped;
@@ -21,8 +23,10 @@ public class GhostBlock : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		//cycle through blocks when f is pressed
 		if(Input.GetKeyDown(KeyCode.F))
 		{
+			//increase the index and then set the sprite and template varible
 			CurBlock++;
 			//print(Blocks.Count);
 			//print(CurBlock);
