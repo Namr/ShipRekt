@@ -99,7 +99,8 @@ public class Block : MonoBehaviour {
 		//Debug.DrawRay (transform.position,-transform.up,Color.red,50);
 		if (hits != null) {
 			foreach (RaycastHit2D hit in hits) {
-				if (hit.collider.transform != transform && hit.collider.tag == transform.tag) {
+				Debug.Log (RoundToX(Vector3.Distance(hit.transform.position,transform.position),0.5f));
+				if (hit.collider.transform != transform && hit.collider.tag == transform.tag && RoundToX(Vector3.Distance(hit.transform.position,transform.position),1.0f) % 1 == 0 && RoundToX(hit.transform.rotation.eulerAngles.z - transform.rotation.eulerAngles.z,0.2f) % 90 == 0){
 					return hit.collider.GetComponent<Block> ();
 				}
 			}
@@ -107,4 +108,8 @@ public class Block : MonoBehaviour {
 		return null;
 	}
 
+	public float RoundToX(float f, float x)
+	{
+		return x * Mathf.RoundToInt(f / x);
+	}
 }

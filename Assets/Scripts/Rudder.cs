@@ -32,8 +32,10 @@ public class Rudder : MonoBehaviour {
 		/*float*/ force = Velocity3D.y * FudgeFactor * Mathf.Sin(RudderTilt);
 		//block.Parent.rigidBody2D.AddForceAtPosition(new Vector2(Mathf.Sin((Mathf.Deg2Rad * ( transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force,Mathf.Cos((Mathf.Deg2Rad * (transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force),transform.position);
 		block.Parent.rigidBody2D.AddForceAtPosition
-		(new Vector2(Mathf.Sin((Mathf.Deg2Rad * ( transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force,
-			Mathf.Cos((Mathf.Deg2Rad * (transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force),transform.position);
+		(new Vector2(Mathf.Sin((Mathf.Deg2Rad * 
+			( transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force,
+			Mathf.Cos((Mathf.Deg2Rad * (transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) 
+				+ Mathf.PI/2) * force),transform.position);
 		//Debug.DrawRay(transform.position, new Vector2(Mathf.Sin((Mathf.Deg2Rad * (transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force,Mathf.Cos((Mathf.Deg2Rad * (transform.localRotation.eulerAngles.z - transform.rotation.eulerAngles.z)) + Mathf.PI/2) * force),Color.black,0.2f);
 	}
 }
