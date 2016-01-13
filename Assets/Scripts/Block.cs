@@ -56,7 +56,7 @@ public class Block : MonoBehaviour {
 			Parent = ParentTrans.GetComponent<Parent>();
 			Parent.ShipID = NewShipID;
 			Parent.bc = bc;
-			ParentTrans.name = "Parent " + NewShipID.ToString ();
+			ParentTrans.name = "Parent " + NewShipID.ToString();
 		}
 		//join the ship with the ID
 		else 
@@ -82,7 +82,8 @@ public class Block : MonoBehaviour {
 		//decide the direction to check for a block (0 = up,1 = down,2 = right,3 = left)
 		switch (dir)
 		{
-			case 0:
+			default:
+            case 0:
 				hits = Physics2D.RaycastAll (transform.position, transform.up,0.6f);
 			break;
 			case 1:
@@ -94,9 +95,6 @@ public class Block : MonoBehaviour {
 			case 3:
 				hits = Physics2D.RaycastAll (transform.position, -transform.right,0.6f);
 			break;
-			default:
-				hits = Physics2D.RaycastAll (transform.position, transform.up,0.6f);
-			break;
 		}
 		//make sure the block we hit was not 1. us 2. a shipblock 3. is not part of another ship
 		if (hits != null) {
@@ -104,7 +102,7 @@ public class Block : MonoBehaviour {
 				if (hit.collider.transform != transform && hit.collider.tag == transform.tag && 
 					RoundToX(Vector3.Distance(hit.transform.position,transform.position),1.0f) % 1 == 0 && 
 					RoundToX(hit.transform.rotation.eulerAngles.z - transform.rotation.eulerAngles.z,0.2f) % 90 == 0){
-					return hit.collider.GetComponent<Block> ();
+					return hit.collider.GetComponent<Block>();
 				}
 			}
 		} 
