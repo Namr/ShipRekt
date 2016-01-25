@@ -2,30 +2,26 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-    public int speed;
+    public float speed;
     Rigidbody2D rb2d;
-	// Use this for initialization
-	void Start () {
-	    rb2d = GetComponent<Rigidbody2D>();
+	void Start()
+	{
+		rb2d = GetComponent<Rigidbody2D> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if(Input.GetKey(KeyCode.W))
-        {
-            rb2d.AddForce(new Vector2(0,1));
-        }
-        else if(Input.GetKey(KeyCode.S))
-        {
-            rb2d.AddForce(new Vector2(0, -1));
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            rb2d.AddForce(new Vector2(-1, 0));
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            rb2d.AddForce(new Vector2(1, 0));
-        }
+
+	void FixedUpdate () {
+		Vector3 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Quaternion rot = Quaternion.LookRotation (transform.position - mousePosition,Vector3.forward);
+		transform.rotation = rot;
+		transform.eulerAngles = new Vector3 (0, 0, transform.eulerAngles.z);
+		rb2d.angularVelocity = 0;
+		float inputV = Input.GetAxis ("Vertical");
+		rb2d.AddForce (gameObject.transform.up * speed * inputV);
+		float inputH = Input.GetAxis ("Horizontal");
+		rb2d.AddForce (gameObject.transform.right * speed * inputH);
+		if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+		{
+			rb2d.velocity = new Vector2(0,0);
+		}
 	}
 }
